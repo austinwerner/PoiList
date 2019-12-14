@@ -1,6 +1,7 @@
 package com.example.poilist
 
-import android.util.Log
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import kotlinx.android.synthetic.main.layout_listitem.view.*
 
 class RecyclerViewAdapter(val allStores: AllStores): RecyclerView.Adapter<CustomViewHolder>() {
 
+    private var context: Context? = null
+
     override fun getItemCount(): Int {
         return allStores.stores.size
     }
@@ -17,6 +20,8 @@ class RecyclerViewAdapter(val allStores: AllStores): RecyclerView.Adapter<Custom
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.layout_listitem, parent, false)
+
+        context = parent.getContext()
         return CustomViewHolder(cellForRow)
     }
 
@@ -30,7 +35,10 @@ class RecyclerViewAdapter(val allStores: AllStores): RecyclerView.Adapter<Custom
         Picasso.get().load(stores.storeLogoURL).into(thumbnail)
 
         holder.view.image.setOnClickListener{
-            Log.d( "WERNER","clicked on the image ")
+            val intent = Intent(context, StoreInfo::class.java)
+
+            //intent.putExtra("keyIdentifier", value)
+            context?.startActivity(intent)
         }
     }
 
