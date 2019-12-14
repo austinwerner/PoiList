@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.poilist"
-        minSdkVersion 15
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -44,4 +44,10 @@ dependencies {
 
     // OK HTTP
     implementation "com.squareup.okhttp3:okhttp:4.2.1"
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

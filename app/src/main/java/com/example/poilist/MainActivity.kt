@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
@@ -15,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = RecyclerViewAdapter()
 
         Log.d("WERNER", "created ")
         fetchJson()
+        setupCallback()
     }
 
     fun fetchJson() {
@@ -34,7 +35,19 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body = response?.body?.string()
                 Log.d( "WERNER", body )
+
+                val gson = GsonBuilder().create()
+                val allStores = gson.fromJson(body,AllStores::class.java)
+
+                runOnUiThread {
+                    recycler_view.adapter = RecyclerViewAdapter(allStores)
+                }
+
             }
         })
+    }
+
+    fun setupCallback() {
+
     }
 }
