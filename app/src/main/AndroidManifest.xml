@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBaBhz3z836o7I9CqNxabu1lzTId4ijx04" />
         <activity android:name=".StoreInfo"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -20,6 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
-
 </manifest>

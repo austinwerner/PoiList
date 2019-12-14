@@ -26,18 +26,18 @@ class RecyclerViewAdapter(val allStores: AllStores): RecyclerView.Adapter<Custom
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val stores = allStores.stores[position]
-        holder.view.name.text = stores.name
-        holder.view.city.text = stores.city + ", " + stores.state
-        holder.view.number.text = stores.phone
+        val store = allStores.stores[position]
+        holder.view.name.text = store.name
+        holder.view.city.text = store.city + ", " + store.state
+        holder.view.number.text = store.phone
 
         val thumbnail = holder.view.image
-        Picasso.get().load(stores.storeLogoURL).into(thumbnail)
+        Picasso.get().load(store.storeLogoURL).into(thumbnail)
 
         holder.view.image.setOnClickListener{
             val intent = Intent(context, StoreInfo::class.java)
 
-            //intent.putExtra("keyIdentifier", value)
+            intent.putExtra("data", store)
             context?.startActivity(intent)
         }
     }
